@@ -1,9 +1,11 @@
 import dataclasses
 import datetime as dt
+import io
 import json
 import re
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 from unittest import mock
 
@@ -21,6 +23,24 @@ def market(question, date_label, yes, volume=1000):
 
 
 class TimelineTests(unittest.TestCase):
+    def test_get_json_honors_retry_after_for_rate_limits(self):
+        error = urllib.error.HTTPError(
+            "https://gamma-api.polymarket.com/events",
+            429,
+            "Too Many Requests",
+            {"Retry-After": "3"},
+            None,
+        )
+        with (
+            mock.patch.object(timeline.urllib.request, "urlopen", side_effect=[error, io.BytesIO(b'{"ok": true}')]),
+            mock.patch.object(timeline.random, "uniform", return_value=0.0),
+            mock.patch.object(timeline.time, "sleep") as sleep,
+        ):
+            result = timeline.get_json("/events")
+
+        self.assertEqual(result, {"ok": True})
+        sleep.assert_called_once_with(3.0)
+
     def test_html_defaults_to_thirty_days_of_history(self):
         self.assertEqual(timeline.parse_args(["--html"]).history_days, 30)
         self.assertEqual(timeline.parse_args(["--html", "--history-days", "0"]).history_days, 0)
@@ -602,6 +622,71 @@ class TimelineTests(unittest.TestCase):
         }
         self.assertEqual(timeline.classify_event(hardware)[2], "rejected")
         self.assertEqual(timeline.classify_event(ranking)[2], "rejected")
+
+    def test_discovery_rotates_a_bounded_set_of_rejected_event_rechecks(self):
+        def record(slug, last_checked):
+            return {
+                "event_id": slug,
+                "title": "Best AI model",
+                "provider": "OpenAI",
+                "shape": "ranking",
+                "classification": "rejected",
+                "fingerprint": slug,
+                "first_seen": "2025-06-01T00:00:00+00:00",
+                "last_checked": last_checked,
+                "last_seen": last_checked,
+            }
+
+        state = timeline.empty_discovery_state()
+        state["events"] = {
+            "newest": record("newest", "2025-06-03T00:00:00+00:00"),
+            "oldest": record("oldest", "2025-06-01T00:00:00+00:00"),
+            "middle": record("middle", "2025-06-02T00:00:00+00:00"),
+        }
+        canonical_fetches = []
+
+        def fake_get(path, params=None, retries=timeline.HTTP_RETRIES):
+            if path == "/public-search":
+                return {"events": [], "pagination": {"hasMore": False}}
+            if path == "/events/keyset":
+                return {"events": [], "next_cursor": None}
+            if path == "/events" and params and params.get("slug"):
+                slug = params["slug"]
+                canonical_fetches.append(slug)
+                return [
+                    {
+                        "id": slug,
+                        "slug": slug,
+                        "title": "Best AI model",
+                        "description": "OpenAI ranking market",
+                        "active": True,
+                        "closed": False,
+                        "markets": [],
+                    }
+                ]
+            raise AssertionError((path, params))
+
+        with (
+            mock.patch.object(timeline, "AUDIT_RECHECK_LIMIT", 2),
+            mock.patch.object(timeline, "get_json", side_effect=fake_get),
+        ):
+            result = timeline.discover_event_candidates([], (), state, tag_slugs=())
+
+        self.assertEqual(set(canonical_fetches), {"oldest", "middle"})
+        deferred = next(decision for decision in result.decisions if decision.slug == "newest")
+        self.assertEqual(deferred.classification, "rejected")
+        self.assertEqual(deferred.change, "unchanged")
+        self.assertIn("recheck deferred", deferred.reason)
+        self.assertEqual(result.state["events"]["newest"], state["events"]["newest"])
+
+        canonical_fetches.clear()
+        with (
+            mock.patch.object(timeline, "AUDIT_RECHECK_LIMIT", 2),
+            mock.patch.object(timeline, "get_json", side_effect=fake_get),
+        ):
+            timeline.discover_event_candidates([], (), result.state, tag_slugs=())
+        self.assertEqual(len(canonical_fetches), 2)
+        self.assertIn("newest", canonical_fetches)
 
     def test_discovery_state_round_trips_and_report_explains_rejections(self):
         state = timeline.empty_discovery_state()

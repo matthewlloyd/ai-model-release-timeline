@@ -17,9 +17,11 @@ import argparse
 import concurrent.futures
 import dataclasses
 import datetime as dt
+import email.utils
 import hashlib
 import html
 import json
+import random
 import re
 import sys
 import time
@@ -68,6 +70,10 @@ DEFAULT_TAG_SLUGS = ("openai", "claude", "gemini-ultra")
 CLOSED_SEARCH_QUERIES = ("OpenAI", "ChatGPT", "Anthropic", "Claude", "Gemini")
 DISCOVERY_STATE_VERSION = 1
 INCREMENTAL_SCAN_PAGE_LIMIT = 50
+HTTP_RETRIES = 5
+MAX_RETRY_DELAY_SECONDS = 60.0
+CANONICAL_FETCH_WORKERS = 4
+AUDIT_RECHECK_LIMIT = 25
 
 PROVIDER_TERMS = {
     "OpenAI": ("openai", "chatgpt", "gpt-"),
@@ -223,7 +229,34 @@ class StateError(RuntimeError):
     pass
 
 
-def get_json(path: str, params: dict[str, Any] | None = None, retries: int = 3) -> Any:
+def retry_delay_seconds(exc: BaseException, attempt: int) -> float:
+    """Return a bounded exponential delay, respecting Retry-After when present."""
+    delay = min(float(2**attempt), MAX_RETRY_DELAY_SECONDS)
+    if isinstance(exc, urllib.error.HTTPError) and exc.headers:
+        retry_after = exc.headers.get("Retry-After")
+        if retry_after:
+            try:
+                delay = max(delay, float(retry_after))
+            except ValueError:
+                try:
+                    retry_at = email.utils.parsedate_to_datetime(retry_after)
+                    if retry_at.tzinfo is None:
+                        retry_at = retry_at.replace(tzinfo=dt.UTC)
+                    delay = max(delay, (retry_at - dt.datetime.now(dt.UTC)).total_seconds())
+                except (TypeError, ValueError, OverflowError):
+                    pass
+    delay = max(0.0, min(delay, MAX_RETRY_DELAY_SECONDS))
+    jitter = random.uniform(0.0, min(1.0, delay * 0.25))
+    return min(delay + jitter, MAX_RETRY_DELAY_SECONDS)
+
+
+def is_retryable_error(exc: BaseException) -> bool:
+    if not isinstance(exc, urllib.error.HTTPError):
+        return True
+    return exc.code in {408, 425, 429} or 500 <= exc.code < 600
+
+
+def get_json(path: str, params: dict[str, Any] | None = None, retries: int = HTTP_RETRIES) -> Any:
     query = urllib.parse.urlencode(params or {}, doseq=True)
     url = f"{GAMMA_API}{path}" + (f"?{query}" if query else "")
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
@@ -232,13 +265,13 @@ def get_json(path: str, params: dict[str, Any] | None = None, retries: int = 3) 
             with urllib.request.urlopen(request, timeout=20) as response:
                 return json.load(response)
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-            if attempt + 1 == retries:
+            if attempt + 1 == retries or not is_retryable_error(exc):
                 raise ApiError(f"GET {url} failed: {exc}") from exc
-            time.sleep(0.5 * (2**attempt))
+            time.sleep(retry_delay_seconds(exc, attempt))
     raise AssertionError("unreachable")
 
 
-def post_clob_json(path: str, body: dict[str, Any], retries: int = 3) -> Any:
+def post_clob_json(path: str, body: dict[str, Any], retries: int = HTTP_RETRIES) -> Any:
     url = f"{CLOB_API}{path}"
     request = urllib.request.Request(
         url,
@@ -251,9 +284,9 @@ def post_clob_json(path: str, body: dict[str, Any], retries: int = 3) -> Any:
             with urllib.request.urlopen(request, timeout=30) as response:
                 return json.load(response)
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-            if attempt + 1 == retries:
+            if attempt + 1 == retries or not is_retryable_error(exc):
                 raise ApiError(f"POST {url} failed: {exc}") from exc
-            time.sleep(0.5 * (2**attempt))
+            time.sleep(retry_delay_seconds(exc, attempt))
     raise AssertionError("unreachable")
 
 
@@ -433,27 +466,44 @@ def discover_event_candidates(
     forced = {slug_from_url(value) for value in extra_slugs}
     for slug in forced:
         add({"slug": slug}, "manual")
-    for slug, record in (previous_state.get("events") or {}).items():
+    previous_records = previous_state.get("events") or {}
+    for slug, record in previous_records.items():
         add({"slug": slug}, "state")
 
-    fetch_slugs = [
+    audit_only_classifications = {"rejected", "unsupported"}
+    audit_rechecks = {
         slug
-        for slug, summary in summaries.items()
-        if candidate_mentions_provider(summary) or slug in forced or "state" in source_names.get(slug, set())
-    ]
+        for slug, record in sorted(
+            (
+                (slug, record)
+                for slug, record in previous_records.items()
+                if record.get("classification") in audit_only_classifications
+            ),
+            key=lambda item: (str(item[1].get("last_checked") or item[1].get("last_seen") or ""), item[0]),
+        )[:AUDIT_RECHECK_LIMIT]
+    }
+    fetch_slugs: list[str] = []
+    for slug, summary in summaries.items():
+        previous = previous_records.get(slug)
+        is_new_candidate = previous is None and candidate_mentions_provider(summary)
+        is_current_timeline_record = (
+            previous is not None and previous.get("classification") not in audit_only_classifications
+        )
+        if slug in forced or is_new_candidate or is_current_timeline_record or slug in audit_rechecks:
+            fetch_slugs.append(slug)
+    fetch_slug_set = set(fetch_slugs)
 
     def fetch(slug: str) -> tuple[str, dict[str, Any] | None]:
         records = get_json("/events", {"slug": slug})
         return slug, records[0] if records else None
 
     canonical: dict[str, dict[str, Any]] = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=CANONICAL_FETCH_WORKERS) as executor:
         for slug, event in executor.map(fetch, fetch_slugs):
             if event:
                 canonical[slug] = event
 
     now = dt.datetime.now(dt.UTC).isoformat()
-    previous_records = previous_state.get("events") or {}
     next_records: dict[str, dict[str, Any]] = {}
     accepted_events: list[dict[str, Any]] = []
     history_events: list[dict[str, Any]] = []
@@ -461,6 +511,22 @@ def discover_event_candidates(
     for slug in sorted(set(fetch_slugs) | set(previous_records)):
         event = canonical.get(slug)
         previous = previous_records.get(slug) or {}
+        if slug not in fetch_slug_set:
+            decisions.append(
+                DiscoveryDecision(
+                    str(previous.get("event_id") or ""),
+                    slug,
+                    str(previous.get("title") or slug),
+                    previous.get("provider"),
+                    str(previous.get("shape") or "unknown"),
+                    str(previous.get("classification") or "unavailable"),
+                    "unchanged",
+                    "Canonical recheck deferred by the audit refresh rotation.",
+                    tuple(sorted(source_names.get(slug, ()))),
+                )
+            )
+            next_records[slug] = previous
+            continue
         if event is None:
             decisions.append(
                 DiscoveryDecision(
@@ -476,7 +542,7 @@ def discover_event_candidates(
                 )
             )
             if previous:
-                next_records[slug] = previous
+                next_records[slug] = {**previous, "last_checked": now}
             continue
 
         provider, shape, classification, reason = classify_event(event, forced=slug in forced)
@@ -511,6 +577,7 @@ def discover_event_candidates(
             "classification": classification,
             "fingerprint": fingerprint,
             "first_seen": previous.get("first_seen") or now,
+            "last_checked": now,
             "last_seen": now,
         }
         if classification == "accepted":
