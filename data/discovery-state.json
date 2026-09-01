@@ -500,8 +500,8 @@
       "event_id": "704863",
       "fingerprint": "8173eacfdbb5321b6ad06d219d635ec88d8166294bf6cabf530c3f8a1b1077bd",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-deadlines",
       "title": "Anthropic announces permanent paid plan access for Fable 5 by...?"
@@ -643,8 +643,8 @@
       "event_id": "704817",
       "fingerprint": "53fe30093254ed73b1c82ff0e985a0189065227856d523bd6cfed9535ab4a6ec",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-deadlines",
       "title": "Anthropic removes paid plan access for Fable 5 by...?"
@@ -1028,8 +1028,8 @@
       "event_id": "22868",
       "fingerprint": "682837b494f8f1acce6ad9a3194ea864eb7695dcf149b8bcab2afb9a461082a1",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "ChatGPT o3 released by Friday?"
@@ -1248,8 +1248,8 @@
       "event_id": "256428",
       "fingerprint": "0a367171b6e52262fb5e366977c6886f524366150ba291aed0a661c26aaff270",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Claude 4.7 released by...?"
@@ -1259,8 +1259,8 @@
       "event_id": "527290",
       "fingerprint": "fab4b704368f4ea6f7990ece25b85093e83c7540dcfb71b06d4808f4e5080a5e",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Claude 4.8 released by...?"
@@ -1325,8 +1325,8 @@
       "event_id": "605645",
       "fingerprint": "2d39041b1c98eb720268555c92f67bdf8da3c40fdf062ac46f48d77c49c27b6c",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-deadlines",
       "title": "Claude Mythos 5 access restored by\u2026?"
@@ -1347,8 +1347,8 @@
       "event_id": "314315",
       "fingerprint": "0a9b5a68ab504ff25463d2218380f5343341ac934a144ecffe2ea8d2f68c117e",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Claude Mythos released by\u2026?"
@@ -1358,8 +1358,8 @@
       "event_id": "573859",
       "fingerprint": "d39789515a82a6471d9941f0352562c6b8b2381fee820b9939ee9b382d6f0e4c",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-on",
       "title": "Claude Mythos released on\u2026?"
@@ -1446,8 +1446,8 @@
       "event_id": "84669",
       "fingerprint": "4ce9a6045dccefaa70f5132ee56991b213c20a90c678d8e5a2f9014010e9ca7b",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini 3.0 Flash released by...?"
@@ -1457,8 +1457,8 @@
       "event_id": "36303",
       "fingerprint": "0632db91cf8e994e34e2930dde3e05fde654ced359006702f035c5414a15edf8",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini 3.0 released by...?"
@@ -1468,8 +1468,8 @@
       "event_id": "425315",
       "fingerprint": "a5410d28c16eed5fd987aa212f11af8c9f5be471e73e1fab25a3119f003944aa",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini 3.2 released by...?"
@@ -1479,8 +1479,8 @@
       "event_id": "452304",
       "fingerprint": "f14d018490872cf0bf0e48774de2548561faa5f0103eb08c3c6c986816bb02f5",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Gemini 3.2 released on...?"
@@ -1490,8 +1490,8 @@
       "event_id": "198615",
       "fingerprint": "92405986f6ff7f11e27e17fd8ad642b033329560ae04bb59aca3b1c456cf6db2",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini 3.5 released by...?"
@@ -1501,8 +1501,8 @@
       "event_id": "103527",
       "fingerprint": "340d8f817eca405871177c0c69be101367ad69eefade45bc4e9842bed30e5890",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini 4.0 released by...?"
@@ -1523,8 +1523,8 @@
       "event_id": "902999",
       "fingerprint": "7b614e09880f40ada4b7f4f68dc6daffed8b221dba05ea065cb1430038ecd309",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Gemini Ultra released by Jan 31?"
@@ -1925,6 +1925,17 @@
       "shape": "consumer-deadlines",
       "title": "Google (GOOGL) closes above ___ on September 1?"
     },
+    "googl-close-above-on-september-2-2026": {
+      "classification": "rejected",
+      "event_id": "947405",
+      "fingerprint": "fa36757a26a38dcfbadbc680c62a532eb50f817d6d5aa55810f306158f8bfe6c",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Google",
+      "shape": "consumer-deadlines",
+      "title": "Google (GOOGL) closes above ___ on September 2?"
+    },
     "googl-up-or-down-on-august-10-2026": {
       "classification": "rejected",
       "event_id": "810536",
@@ -2244,6 +2255,17 @@
       "shape": "unsupported",
       "title": "Google (GOOGL) Up or Down on September 1?"
     },
+    "googl-up-or-down-on-september-2-2026": {
+      "classification": "rejected",
+      "event_id": "947395",
+      "fingerprint": "f08066dde473376e7a77e05e284424fc76d14c60c63e16ec37f47750f43a8f9f",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Google",
+      "shape": "unsupported",
+      "title": "Google (GOOGL) Up or Down on September 2?"
+    },
     "googl-week-august-21-2026": {
       "classification": "rejected",
       "event_id": "862107",
@@ -2370,8 +2392,8 @@
       "event_id": "36307",
       "fingerprint": "994f94cf3f22d15a62d9faf7fc0f9dde3064981d787c9ccae10f4051645f5120",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "GPT-6 released by\u2026?"
@@ -2508,6 +2530,17 @@
       "shape": "unsupported",
       "title": "Greece F17, Singles: Wishaya Trongcharoenchaikul vs Lingxi Zhao"
     },
+    "itf-zhengyu-trongc-2026-09-02": {
+      "classification": "rejected",
+      "event_id": "947787",
+      "fingerprint": "173233df4bd4a6f0683f65d5f640ed8b752864930cb4cabea987f58acb19b0db",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Anthropic",
+      "shape": "unsupported",
+      "title": "M15 Wuning: ZHENGYU SUN vs Wishaya Trongcharoenchaikul"
+    },
     "jean-lesage-quebec-national-assembly-election-winner": {
       "classification": "rejected",
       "event_id": "943665",
@@ -2590,8 +2623,8 @@
       "event_id": "428664",
       "fingerprint": "e0b9baf0b7b861b1553bdb97f639fdf1738750cc27ea0e739997276b9ab1e39b",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "New Gemini reasoning flagship released by...?"
@@ -2612,8 +2645,8 @@
       "event_id": "656720",
       "fingerprint": "b0228212e85c4e7c5fc4c4e80289816aff9e0be0b279fdd715a54895074a5c89",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Claude Haiku released by...?"
@@ -2656,8 +2689,8 @@
       "event_id": "656719",
       "fingerprint": "31a00be2f7a3f769a3def1b763f8d01aea72bbf6bc28103dbc7a0f20a301decd",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Claude Opus released by...?"
@@ -2667,8 +2700,8 @@
       "event_id": "765707",
       "fingerprint": "2dd0aba1a7fac92129cd0ecec9fd95b03feaad1ed912d70f366087e49e4a124e",
       "first_seen": "2026-07-29T00:53:17.408680+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Claude Opus released by...?"
@@ -2678,8 +2711,8 @@
       "event_id": "704769",
       "fingerprint": "53fb5048f195afe1b4bf8a9539693080f587274e1aa2df828e80be63fa2d06d6",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-on",
       "title": "Next Claude Opus released on...?"
@@ -2700,8 +2733,8 @@
       "event_id": "630670",
       "fingerprint": "a1b10ee30e02bda9f81c3cf1f3a513598c6b1518f121a609e4ad13987352f2ed",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Claude Sonnet released by...?"
@@ -2711,8 +2744,8 @@
       "event_id": "656718",
       "fingerprint": "52430875cccbebbc6cbfb4c1d0a92a485ee71fd5a8a03f49e745b394003d1fee",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Claude Sonnet released by...?"
@@ -2722,8 +2755,8 @@
       "event_id": "944029",
       "fingerprint": "dbeedbccc22c244e3485bd98e5a72d3f49a4e1f2c3357df68257aa1faeaf61af",
       "first_seen": "2026-08-31T22:49:36.966876+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Next Gemini Flash Model (3.8+) released on...?"
@@ -2744,8 +2777,8 @@
       "event_id": "850742",
       "fingerprint": "d27ca1d96a540421c3bc93f167fc332cb3de81387449af6e0544897e331d6a29",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Next Google Gemini Flash-Lite Model (3.6+) released by...?"
@@ -2766,8 +2799,8 @@
       "event_id": "843929",
       "fingerprint": "db751a4d2717bcb17c1c087f11fe0ad29d04758f286139d68f4e5277806aa7cc",
       "first_seen": "2026-08-13T19:19:29.241863+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Next Google Gemini Flash Model (3.7+) released by...?"
@@ -2775,10 +2808,10 @@
     "next-google-gemini-flash-model-3pt8-released-byptptpt": {
       "classification": "accepted",
       "event_id": "850741",
-      "fingerprint": "357059209874d0f1bec11e060947753b092498dd7ad20b78a5b12ccd5d423f56",
+      "fingerprint": "e9860b0eae0b67da2579522aa8ecdd182695ebf3717cd698c8acc3c3621e06f4",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Next Google Gemini Flash Model (3.8+) released by...?"
@@ -2832,8 +2865,8 @@
       "event_id": "549546",
       "fingerprint": "cb8c58ced78f1b220b37597133bcebdc27d5211c4540233a264f4f49936a7cb8",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-by",
       "title": "Next Google Gemini Pro Model released by...?"
@@ -2843,8 +2876,8 @@
       "event_id": "549547",
       "fingerprint": "81237284beaf4575bf9ae48ba802276bb0085be65720b3e58ff924710a73a96c",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Next Google Gemini Pro Model released on...?"
@@ -2854,8 +2887,8 @@
       "event_id": "638386",
       "fingerprint": "6206e3b9617c7dc18a4eec7285290990c5b8ffad09dec3405b5775f0d4294b82",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Next Google Gemini Pro Model released on...?"
@@ -2865,8 +2898,8 @@
       "event_id": "769339",
       "fingerprint": "ced47113c6aa6f069466a420a5c7f2482b7d2e9e82a56216cb14f44f87b32358",
       "first_seen": "2026-07-30T00:50:15.665944+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Next Google Gemini Pro Model released on...?"
@@ -2876,19 +2909,30 @@
       "event_id": "868079",
       "fingerprint": "6b585bd1d7019f8cdada134aac0e00bedc94383662ec4336e76ba49499a224e6",
       "first_seen": "2026-08-18T01:50:07.981324+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "release-on",
       "title": "Next Google Gemini Pro Model released on...?"
+    },
+    "next-mythos-class-model-humanitys-last-exam-debut-20260901074046303": {
+      "classification": "rejected",
+      "event_id": "948066",
+      "fingerprint": "aa97b0197ea75d1b22073e738e21e41cf7632b2c6ec28ea1dd94519ec2ffd364",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Anthropic",
+      "shape": "unsupported",
+      "title": "Next Mythos-Class Model: Humanity's Last Exam Debut?"
     },
     "next-mythos-class-model-released-by": {
       "classification": "accepted",
       "event_id": "578305",
       "fingerprint": "35245cfa0e1e2bd9d71f78c2e0cc1dd5347af1cfecfd2eb98f62294c363c9fa4",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-by",
       "title": "Next Mythos-Class Model released by\u2026?"
@@ -2898,8 +2942,8 @@
       "event_id": "907022",
       "fingerprint": "0558451b71e64516f3555cacabda287b037d4af0ffea4a26afe0473b065aec4f",
       "first_seen": "2026-08-25T01:52:02.212466+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "release-on",
       "title": "Next Mythos-Class Model released on\u2026?"
@@ -2920,8 +2964,8 @@
       "event_id": "850740",
       "fingerprint": "88c61b0c468fe4afe9665a0b1f6d15f38428b15db47fdcd316994d56beb92173",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "Next OpenAI GPT Image Model (2.1+) released by...?"
@@ -2931,8 +2975,8 @@
       "event_id": "850737",
       "fingerprint": "c3db9d6d752e2bf2be85be39a89b92b213c6a20faca63d421dc6de53444eb7f4",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "Next OpenAI GPT Luna (5.7+) released by...?"
@@ -2942,8 +2986,8 @@
       "event_id": "850711",
       "fingerprint": "0dbeddd2173e1578a4e9f6e84e2151e8645e7038f6073b37a75303ca09e3f86d",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "Next OpenAI GPT Sol (5.7+) released by...?"
@@ -2953,8 +2997,8 @@
       "event_id": "850712",
       "fingerprint": "38f1abde4e01cb1b58485b25ad7bd22171ac49dcfe0e673fe825e195dcf8ac0d",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "Next OpenAI GPT Terra (5.7+) released by...?"
@@ -3393,11 +3437,22 @@
       "event_id": "783555",
       "fingerprint": "2c1e1fa94d18f4bd5302c45b915fc95100f50cabb927443ddc84b35ddc9ade34",
       "first_seen": "2026-08-02T00:57:57.682626+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "release-by",
       "title": "OpenAI\u2019s Astra released by\u2026?"
+    },
+    "openais-astra-released-onptptpt-20260901080122046": {
+      "classification": "accepted",
+      "event_id": "948075",
+      "fingerprint": "84a4964904c4124b1c5462bcc556b809304b1f2ae1a1c68642afedfba642eef8",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "OpenAI",
+      "shape": "release-on",
+      "title": "OpenAI's Astra released on...?"
     },
     "openais-valuation-end-of-august-2026": {
       "classification": "rejected",
@@ -3877,7 +3932,8 @@
       "event_id": "797729",
       "fingerprint": "69c458cc0bdd950d3a0972f8535e5141d51f6c70c8376ef7cb888b48d755acb3",
       "first_seen": "2026-08-05T03:31:26.427980+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "unsupported",
       "title": "The Game Awards: Game of the Year"
@@ -3885,9 +3941,10 @@
     "third-best-ai-agent-lab-end-of-august-20260812151735597": {
       "classification": "rejected",
       "event_id": "841159",
-      "fingerprint": "b7b6083bef96bb80bc01e12c10dfc0807718716598172cc40283afabf6f3c8eb",
+      "fingerprint": "c75d3b3062e9693f97d4f434ac64cbabeed78d59fee379f3e137bcc82c6ff253",
       "first_seen": "2026-08-13T02:46:17.266110+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Agent Lab end of August?"
@@ -3895,9 +3952,10 @@
     "third-best-ai-agent-lab-end-of-october-20260812153019470": {
       "classification": "rejected",
       "event_id": "845601",
-      "fingerprint": "97edba1f98ba5a7a5f18f8a21f4620db7656a888b244f48c46b1cbcb381afc87",
+      "fingerprint": "d05fe1f46281c141fbdacaa3bb580d2ea430bdd61d56093c0791ca582ae27787",
       "first_seen": "2026-08-14T02:45:02.421582+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Agent Lab end of October?"
@@ -3907,7 +3965,8 @@
       "event_id": "841162",
       "fingerprint": "82f8cbe25be645af034084a24267ab5156b505be1b2d1d189a647235f9ceb63b",
       "first_seen": "2026-08-13T02:46:17.266110+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Agent Lab end of September?"
@@ -3915,9 +3974,10 @@
     "third-best-ai-lab-end-of-august-20260720230611802": {
       "classification": "rejected",
       "event_id": "727232",
-      "fingerprint": "244cf393e69045fce4f8c223ad571f2aad785ddc041e0b05b78b485fba28889b",
+      "fingerprint": "2cc118f962b744d40b1b1cfa2d75597670158b7ec27684ce20d16f49213b51e4",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Lab end of August?"
@@ -3927,7 +3987,8 @@
       "event_id": "841232",
       "fingerprint": "4d090f1f5d2196dca94cfe1a5f060f941e071f33b6d47898a226dd6d91ef349c",
       "first_seen": "2026-08-13T02:46:17.266110+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Lab end of October?"
@@ -3937,7 +3998,8 @@
       "event_id": "745652",
       "fingerprint": "23810e739e3e71e0e80d303021a282cd83a27a05c8458f2cf5606a3d98e9273a",
       "first_seen": "2026-07-25T00:55:03.364517+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best AI Lab end of September?"
@@ -3945,9 +4007,10 @@
     "third-best-code-arena-webdev-ai-lab-end-of-august-20260720220546729": {
       "classification": "rejected",
       "event_id": "727188",
-      "fingerprint": "e87d78c02c13b45b9dafa491f1be00b503866dc07efc07831dfb5acc80644aa9",
+      "fingerprint": "48bf329ca3694dbd3c8d97f6623c62903555fc263579a535c2541322d8b6d6e7",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Code Arena WebDev AI Lab end of August?"
@@ -3955,9 +4018,10 @@
     "third-best-code-arena-webdev-ai-lab-end-of-october": {
       "classification": "rejected",
       "event_id": "841229",
-      "fingerprint": "fba6a301869bcde3c3788d70b59ea9155c589abed3455124f33f977af9b9364b",
+      "fingerprint": "02d6e0b7953a78fa8826a7184f153d8c8631d54f00ad859862c13589df745f34",
       "first_seen": "2026-08-13T02:46:17.266110+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Code Arena WebDev AI Lab end of October?"
@@ -3967,7 +4031,8 @@
       "event_id": "745625",
       "fingerprint": "11015a6993041e3f7de4b2474f71615e445af097d9dacfe8cbf77256de0cbae6",
       "first_seen": "2026-07-25T00:55:03.364517+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Code Arena WebDev AI Lab end of September?"
@@ -3975,9 +4040,10 @@
     "third-best-text-arena-math-ai-lab-end-of-august-20260720230105162": {
       "classification": "rejected",
       "event_id": "727222",
-      "fingerprint": "336aed7d43517f3125f0b0727ea068375fee0a7008302b62f05e2bb3eb9e435e",
+      "fingerprint": "6cca3670acd93554be1a2999c389088c8466d002e468888582be754d2d195cd7",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Text Arena Math AI Lab end of August?"
@@ -3987,7 +4053,8 @@
       "event_id": "841208",
       "fingerprint": "a958444402569e0c471e234ea514169a7f9d4beff29522a677ccf5df83bdf3b3",
       "first_seen": "2026-08-13T02:46:17.266110+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Text Arena Math AI Lab end of October?"
@@ -3997,7 +4064,8 @@
       "event_id": "745636",
       "fingerprint": "73b3481284cf82797c575f8ec38849e982482d71cadf760dd53268bc49a23fcd",
       "first_seen": "2026-07-25T00:55:03.364517+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "Third-best Text Arena Math AI Lab end of September?"
@@ -4007,7 +4075,8 @@
       "event_id": "528018",
       "fingerprint": "ea46f04373586d088dac0b3fcd8b694663f8279eb2602779536058cadfb16ed0",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "unsupported",
       "title": "TIME Person of the Year 2026"
@@ -4017,7 +4086,8 @@
       "event_id": "15613",
       "fingerprint": "e55937557c5cf040a80545063e6c7d511666ea9f7c1affbd1720d1b61b2f7775",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "consumer-deadlines",
       "title": "Top AI model on December 31?"
@@ -4027,7 +4097,8 @@
       "event_id": "663849",
       "fingerprint": "70b53807e57b118c588be577ddcce403e7a4fb8c81cb02e4a9aeeb99099bc629",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "unsupported",
       "title": "US Government removes public access to another Anthropic AI model in 2026?"
@@ -4037,7 +4108,8 @@
       "event_id": "663847",
       "fingerprint": "bfe2cfb919f794525ccfa610ed7cd53c5b3170af5ffcd2f1b48cffd69aac8f19",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": null,
       "shape": "unsupported",
       "title": "US Government removes public access to another major AI model in 2026?"
@@ -4047,7 +4119,8 @@
       "event_id": "592360",
       "fingerprint": "06b0d88cffcdd2c5fac8ce0261791a3a94cbd169df2289256e2ecd3795f87493",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-deadlines",
       "title": "US government rescinds Claude Fable 5 foreigner ban by\u2026?"
@@ -4057,7 +4130,8 @@
       "event_id": "918382",
       "fingerprint": "8e2c9a277c002e66bfb78d6be48e213695d365cc001897070bcd51b66b7bc80c",
       "first_seen": "2026-08-27T09:46:48.616539+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "unsupported",
       "title": "What companies will Trump mention in September?"
@@ -4067,8 +4141,8 @@
       "event_id": "80791",
       "fingerprint": "c97f0b716d967f0e581f22274da7174753646b74251cb9d7c2ff16ec4c20b99f",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "consumer-deadlines",
       "title": "What day will Gemini 3.0 be released?"
@@ -4078,8 +4152,8 @@
       "event_id": "100307",
       "fingerprint": "98b491e02e9d1bdab96f145905e914f18eaf4debfc875bdcf44e5c22c3a35b8c",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "consumer-deadlines",
       "title": "What day will OpenAI next release a new frontier model?"
@@ -4089,7 +4163,8 @@
       "event_id": "192873",
       "fingerprint": "ba3c65168f520d6603f895733116d4da798726d5b32a570f80e412a5ba17b723",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "unsupported",
       "title": "What kind of product will OpenAI announce in 2026?"
@@ -4099,7 +4174,8 @@
       "event_id": "758869",
       "fingerprint": "7f5460d1328c422b75b67cabd77da4a7e75f8c0ed4748da9297deeae631667da",
       "first_seen": "2026-07-28T07:11:20.000580+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "unsupported",
       "title": "What will Amazon say during their next earnings call?"
@@ -4109,7 +4185,8 @@
       "event_id": "875763",
       "fingerprint": "55bad35267d748cf306473d7dd68351c530bb9c6ce5b5d33e415553ff1b5f7cc",
       "first_seen": "2026-08-19T18:52:37.669627+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "unsupported",
       "title": "What will Anthropic's IPO valuation be?"
@@ -4119,7 +4196,8 @@
       "event_id": "549095",
       "fingerprint": "b4a8296cb2cbf09de3b3ce251082e7d1a4144781917d339d907ca573f72ccb1e",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "unsupported",
       "title": "What will Anthropic's public ticker be?"
@@ -4129,7 +4207,8 @@
       "event_id": "758538",
       "fingerprint": "1091088de68eb545ec340832d7a5c21228104a108b4d8871244e6e41eb0c2eb6",
       "first_seen": "2026-07-28T00:51:51.555848+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "unsupported",
       "title": "What will Apple say during their next earnings call?"
@@ -4139,7 +4218,8 @@
       "event_id": "813101",
       "fingerprint": "889a9a56e8d6e3d28bc10a468c52959bf3ac2df939c3d8e8eff2dbf051faa41d",
       "first_seen": "2026-08-08T02:21:15.152286+00:00",
-      "last_seen": "2026-08-28T22:18:33.643539+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "unsupported",
       "title": "What will be said on the first Joe Rogan Experience episode of the week? (August 10)"
@@ -4442,8 +4522,8 @@
       "event_id": "868080",
       "fingerprint": "e7825e51c0dc213e10ed88c1360d6cd300ecaa22bc46e123af98336c893596ce",
       "first_seen": "2026-08-18T01:50:07.981324+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Google",
       "shape": "consumer-deadlines",
       "title": "When will the next Google Gemini Pro model be released?"
@@ -5033,8 +5113,8 @@
       "event_id": "850546",
       "fingerprint": "26b60bd5c3f373e242017bc54b195df2fe95fe1f8049a773aee73713c27aac95",
       "first_seen": "2026-08-15T01:49:20.321290+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "consumer-deadlines",
       "title": "Which week will OpenAI release Astra?"
@@ -5044,8 +5124,8 @@
       "event_id": "678625",
       "fingerprint": "685a916c075f609c9c91d211d31b50976dbbffef5c1e92e2f51d66ad084e7cf3",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-binary",
       "title": "Will Anthropic extend Claude Fable 5 paid-plan access again by July 12?"
@@ -5055,8 +5135,8 @@
       "event_id": "696403",
       "fingerprint": "0c600320af0566a3d7ec45b4baefe7f7e77f0040d9ab66ba62cefc6bc77f8e16",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "Anthropic",
       "shape": "consumer-binary",
       "title": "Will Anthropic extend Claude Fable 5 paid-plan access again by July 19?"
@@ -5397,8 +5477,8 @@
       "event_id": "97366",
       "fingerprint": "fbac32b4ab073a77da9f16da2601d987b6e533a00c71438b44b5e6561f4fe14d",
       "first_seen": "2026-07-22T07:20:18.313677+00:00",
-      "last_checked": "2026-09-01T11:38:12.572445+00:00",
-      "last_seen": "2026-09-01T11:38:12.572445+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
       "provider": "OpenAI",
       "shape": "consumer-deadlines",
       "title": "Will OpenAI release a new frontier model by...?"
@@ -5442,6 +5522,17 @@
       "provider": "OpenAI",
       "shape": "unsupported",
       "title": "Will OpenAI release an open source model in 2025?"
+    },
+    "will-openais-astra-model-debut-as-1-text-arena-20260901081919669": {
+      "classification": "rejected",
+      "event_id": "948056",
+      "fingerprint": "73aa3ba9cd29cb622c950e077bbf19d61806bd3b30e382c526567dd60950e7c4",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "OpenAI",
+      "shape": "unsupported",
+      "title": "Will OpenAI's Astra model debut as #1? (Text Arena)"
     },
     "will-openais-valuation-hit-by-august-31-20260730153626210": {
       "classification": "rejected",
@@ -5623,9 +5714,31 @@
       "provider": "OpenAI",
       "shape": "unsupported",
       "title": "Will Sam Altman take equity in OpenAI in 2024?"
+    },
+    "will-the-next-gemini-flash-model-3pt8-debut-as-1-text-arena-20260901081919669": {
+      "classification": "rejected",
+      "event_id": "948065",
+      "fingerprint": "02048000ee584e04472fb5ffb7c4245519646104ff94d7022d058a9c0d95e38d",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Google",
+      "shape": "unsupported",
+      "title": "Will the next Gemini Flash model (3.8+) debut as #1? (Text Arena)"
+    },
+    "will-the-next-mythos-class-model-debut-as-1-text-arena-20260901081919669": {
+      "classification": "rejected",
+      "event_id": "948047",
+      "fingerprint": "7f286bde5b1ce110dcdee301aeae37f2517adfcecf39cdb725de6225fa985048",
+      "first_seen": "2026-09-01T16:38:34.452045+00:00",
+      "last_checked": "2026-09-01T16:38:34.452045+00:00",
+      "last_seen": "2026-09-01T16:38:34.452045+00:00",
+      "provider": "Anthropic",
+      "shape": "unsupported",
+      "title": "Will the next Mythos-Class model debut as #1? (Text Arena)"
     }
   },
-  "max_event_id": 947315,
-  "updated_at": "2026-09-01T11:38:12.572445+00:00",
+  "max_event_id": 948347,
+  "updated_at": "2026-09-01T16:38:34.452045+00:00",
   "version": 1
 }
