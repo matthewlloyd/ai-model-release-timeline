@@ -233,9 +233,30 @@ class TimelineTests(unittest.TestCase):
             as_of=dt.date(2027, 7, 15),
         )
         self.assertIn('class="summary-as-of"', output_with_cursor)
-        self.assertIn('style="left: 22.58%"', output_with_cursor)
+        # The axis now extends to Sep 13 to fit two months after the default Jul 13 start.
+        self.assertIn('style="left: 18.92%"', output_with_cursor)
         self.assertIn("Forecast as of Jul 15, 2027", output_with_cursor)
         self.assertIn("Vertical cursor: forecast date", output_with_cursor)
+
+    def test_overview_two_month_window_handles_year_and_month_ends(self):
+        self.assertEqual(timeline.overview_window_end(dt.date(2027, 12, 31)), dt.date(2028, 2, 29))
+        self.assertEqual(timeline.overview_window_end(dt.date(2028, 12, 31)), dt.date(2029, 2, 28))
+        self.assertEqual(timeline.overview_window_end(dt.date(2027, 7, 13)), dt.date(2027, 9, 13))
+
+    def test_overview_scales_full_horizon_to_two_months_and_labels_every_month(self):
+        item = timeline.TimelineItem(
+            "OpenAI", "GPT", "release", dt.date(2028, 8, 1), "around Aug 1", "median", "", 1, "x", "1",
+            median_date=dt.date(2028, 8, 1),
+        )
+        start, end = dt.date(2027, 7, 1), dt.date(2028, 10, 1)
+        output = timeline.render_summary_card([item], axis_range=(start, end), as_of=dt.date(2027, 7, 15))
+        scale = float(re.search(r'--summary-scale: ([\d.]+)', output).group(1))
+        offset = float(re.search(r'data-view-start="([\d.]+)"', output).group(1))
+        self.assertAlmostEqual((end - start).days / scale, 62)
+        self.assertAlmostEqual(offset * (end - start).days, 12, places=5)
+        self.assertIn('tabindex="0" role="region"', output)
+        # Every month must remain labelled when a long horizon is enlarged for scrolling.
+        self.assertEqual(output.count('class="summary-tick"'), 16)
 
     def test_history_overview_keeps_stable_roster_order_and_greys_missing_rows(self):
         gpt = timeline.TimelineItem(

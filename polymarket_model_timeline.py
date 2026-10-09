@@ -14,6 +14,7 @@ handles these market shapes:
 from __future__ import annotations
 
 import argparse
+import calendar
 import concurrent.futures
 import dataclasses
 import datetime as dt
@@ -1722,6 +1723,13 @@ def summary_roster(history: Sequence[HistorySnapshot]) -> tuple[TimelineItem, ..
     )
 
 
+def overview_window_end(start: dt.date) -> dt.date:
+    """End a two-calendar-month window, clamping to the target month's last day."""
+    year, month = divmod(start.year * 12 + start.month - 1 + 2, 12)
+    month += 1
+    return dt.date(year, month, min(start.day, calendar.monthrange(year, month)[1]))
+
+
 def render_summary_card(
     items: Sequence[TimelineItem],
     axis_range: tuple[dt.date, dt.date] | None = None,
@@ -1783,6 +1791,10 @@ def render_summary_card(
         else:
             min_date = min(range_dates) - dt.timedelta(days=2)
             max_date = max(range_dates) + dt.timedelta(days=2)
+        view_start = max(min_date, as_of - dt.timedelta(days=2)) if as_of else min_date
+        view_end = overview_window_end(view_start)
+        max_date = max(max_date, view_end)
+        view_days = (view_end - view_start).days
         span = max(1, (max_date - min_date).days)
 
         def position(date: dt.date) -> float:
@@ -1847,7 +1859,10 @@ def render_summary_card(
             )
 
         ticks: list[str] = []
-        tick_dates = axis_tick_dates(min_date, max_date)
+        tick_dates = axis_tick_dates(
+            min_date, max_date, max_ticks=max(8, len(boundaries) + 2),
+            minimum_separation=7 / span,
+        )
         for date in tick_dates:
             transform = "0" if date == min_date else ("-100%" if date == max_date else "-50%")
             ticks.append(
@@ -1861,13 +1876,15 @@ def render_summary_card(
           <span aria-hidden="true"></span>
           <span class="summary-as-of-area"><i class="summary-as-of" role="img" style="left: {position(as_of):.2f}%" data-chart-tooltip="{esc(as_of_text)}" aria-label="{esc(as_of_text)}"></i></span>
         </span>"""
-        plot = f"""      <div class="summary-plot" role="group" aria-label="Median forecast dates on one date axis">
+        plot = f"""      <div class="summary-plot-scroll" tabindex="0" role="region" aria-label="Forecast timeline: two months visible; scroll horizontally for more dates" data-view-start="{(view_start - min_date).days / span:.8f}">
+      <div class="summary-plot" style="--summary-scale: {span / view_days:.8f}" role="group" aria-label="Median forecast dates on one date axis">
 {chr(10).join(plot_rows)}
 {as_of_overlay}
         <div class="summary-axis">
-          <span></span>
+          <span class="summary-axis-spacer"></span>
           <span class="summary-axis-track">{''.join(ticks)}</span>
         </div>
+      </div>
       </div>"""
     else:
         plot = '<p class="detail">No forecast median is available in this history window.</p>'
@@ -1956,7 +1973,10 @@ def summary_axis_range(history: Sequence[HistorySnapshot]) -> tuple[dt.date, dt.
     if not dates:
         return None
     dates.extend(snapshot_dates)
-    return min(dates) - dt.timedelta(days=2), max(dates) + dt.timedelta(days=2)
+    return (
+        min(dates) - dt.timedelta(days=2),
+        max(max(dates) + dt.timedelta(days=2), overview_window_end(max(snapshot_dates) - dt.timedelta(days=2))),
+    )
 
 
 def render_html(
@@ -2063,11 +2083,19 @@ def render_html(
     #summary-container[data-overview-filter="active"] .summary-table-row.unavailable {{ display: none; }}
     .summary-plot-title {{ margin: 12px 0 10px; color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }}
     .summary-plot-note {{ margin: -4px 0 10px; color: var(--muted); font-size: .76rem; }}
-    .summary-plot {{ position: relative; }}
-    .summary-plot-row, .summary-axis, .summary-as-of-overlay {{ display: grid; grid-template-columns: minmax(130px, 210px) 1fr; align-items: center; gap: 14px; min-width: 0; }}
+    .summary-plot-scroll {{ --summary-label-width: 210px; --summary-gap: 14px; overflow-x: scroll; padding-bottom: 5px; }}
+    @supports not selector(::-webkit-scrollbar) {{ .summary-plot-scroll {{ scrollbar-color: var(--muted) var(--bg); }} }}
+    .summary-plot-scroll::-webkit-scrollbar {{ height: 12px; }}
+    .summary-plot-scroll::-webkit-scrollbar-track {{ background: var(--bg); border-radius: 6px; }}
+    .summary-plot-scroll::-webkit-scrollbar-thumb {{ background: var(--muted); border: 3px solid var(--bg); border-radius: 6px; }}
+    .summary-plot {{ position: relative; width: calc(var(--summary-label-width) + var(--summary-gap) + (100% - var(--summary-label-width) - var(--summary-gap)) * var(--summary-scale)); min-width: 100%; }}
+    .summary-plot-row, .summary-axis, .summary-as-of-overlay {{ display: grid; grid-template-columns: var(--summary-label-width) 1fr; align-items: center; gap: var(--summary-gap); min-width: 0; }}
     .summary-plot-row {{ min-height: 28px; }}
-    .summary-plot-row.unavailable, .summary-table-row.unavailable {{ opacity: .32; }}
-    .summary-plot-label {{ overflow: hidden; color: var(--text); font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }}
+    .summary-plot-row.unavailable .summary-track, .summary-table-row.unavailable {{ opacity: .32; }}
+    .summary-plot-row.unavailable .summary-plot-label {{ color: color-mix(in srgb, var(--text) 32%, var(--card)); }}
+    .summary-plot-label, .summary-axis-spacer {{ position: sticky; left: 0; z-index: 4; background: var(--card); box-shadow: var(--summary-gap) 0 var(--card); }}
+    .summary-plot-label {{ align-self: stretch; overflow: hidden; color: var(--text); font-size: .82rem; line-height: 28px; text-overflow: ellipsis; white-space: nowrap; }}
+    .summary-axis-spacer {{ align-self: stretch; }}
     .summary-track {{ position: relative; display: block; height: 24px; }}
     .summary-track::before {{ content: ""; position: absolute; top: 50%; right: 0; left: 0; height: 1px; background: var(--line); }}
     .summary-month-grid {{ position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); opacity: .85; }}
@@ -2129,7 +2157,7 @@ def render_html(
     .site-footer {{ margin: 16px 0 0 46px; font-size: .88rem; color: var(--muted); }}
     .site-footer p {{ margin: 8px 0 0; }}
     @media (prefers-color-scheme: dark) {{ :root {{ --bg: #101318; --card: #191e26; --text: #eef1f5; --muted: #a7b0bf; --line: #343c49; --link: #82b1ff; }} }}
-    @media (max-width: 600px) {{ main {{ width: min(100% - 20px, 920px); padding-top: 32px; }} .page-header, .history-controls, .summary-card, .site-footer {{ margin-left: 34px; }} .history-control-row {{ align-items: start; flex-direction: column; }} .summary-card {{ padding: 18px; }} .summary-heading {{ align-items: start; flex-direction: column; }} .summary-plot-row, .summary-axis, .summary-as-of-overlay {{ grid-template-columns: minmax(88px, 110px) 1fr; gap: 9px; }} .summary-table {{ min-width: 540px; }} .timeline::before {{ left: 10px; }} .timeline-item {{ padding-left: 34px; }} .marker {{ left: 4px; }} article {{ padding: 18px; }} .card-header {{ display: block; }} .volume {{ display: block; margin-top: 8px; }} }}
+    @media (max-width: 600px) {{ main {{ width: min(100% - 20px, 920px); padding-top: 32px; }} .page-header, .history-controls, .summary-card, .site-footer {{ margin-left: 34px; }} .history-control-row {{ align-items: start; flex-direction: column; }} .summary-card {{ padding: 18px; }} .summary-heading {{ align-items: start; flex-direction: column; }} .summary-plot-scroll {{ --summary-label-width: 110px; --summary-gap: 9px; }} .summary-table {{ min-width: 540px; }} .timeline::before {{ left: 10px; }} .timeline-item {{ padding-left: 34px; }} .marker {{ left: 4px; }} article {{ padding: 18px; }} .card-header {{ display: block; }} .volume {{ display: block; margin-top: 8px; }} }}
   </style>
 </head>
 <body>
@@ -2180,6 +2208,30 @@ def render_html(
 
       const summary = document.getElementById("summary-container");
       let overviewFilter = "active";
+      let overviewStart = null;
+      const overviewResize = new ResizeObserver(() => restoreOverviewScroll());
+
+      function overviewTrackWidth(scroller) {{
+        return scroller.querySelector(".summary-axis-track").getBoundingClientRect().width;
+      }}
+
+      function restoreOverviewScroll() {{
+        const scroller = summary.querySelector(".summary-plot-scroll");
+        if (scroller) scroller.scrollLeft = overviewStart * overviewTrackWidth(scroller);
+      }}
+
+      function initializeOverviewScroll() {{
+        overviewResize.disconnect();
+        const scroller = summary.querySelector(".summary-plot-scroll");
+        if (!scroller) return;
+        if (overviewStart === null) overviewStart = Number(scroller.dataset.viewStart);
+        restoreOverviewScroll();
+        scroller.addEventListener("scroll", () => {{
+          overviewStart = scroller.scrollLeft / overviewTrackWidth(scroller);
+          hide();
+        }}, {{ passive: true }});
+        overviewResize.observe(scroller);
+      }}
 
       function applyOverviewFilter(value) {{
         overviewFilter = value === "active" ? "active" : "all";
@@ -2235,6 +2287,7 @@ def render_html(
           next.disabled = index === snapshots.length - 1;
           latest.disabled = index === snapshots.length - 1;
           applyOverviewFilter(overviewFilter);
+          initializeOverviewScroll();
           hide();
         }}
 
@@ -2263,6 +2316,7 @@ def render_html(
         renderHistory(snapshots.length - 1);
       }}
       applyOverviewFilter(overviewFilter);
+      if (!historyNode) initializeOverviewScroll();
     }})();
   </script>
 </body>
