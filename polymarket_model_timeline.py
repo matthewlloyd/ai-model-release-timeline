@@ -2111,7 +2111,7 @@ def render_html(
     #summary-container[data-overview-filter="active"] .summary-table-row.unavailable {{ display: none; }}
     .summary-plot-title {{ margin: 12px 0 10px; color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }}
     .summary-plot-note {{ margin: -4px 0 10px; color: var(--muted); font-size: .76rem; }}
-    .summary-plot-scroll {{ --summary-label-width: 210px; --summary-gap: 14px; --summary-axis-height: 46px; container: overview / inline-size; overflow-x: scroll; padding-bottom: 5px; }}
+    .summary-plot-scroll {{ --summary-label-width: 210px; --summary-gap: 14px; --summary-axis-height: 26px; container: overview / inline-size; overflow-x: scroll; padding-bottom: 5px; }}
     @supports not selector(::-webkit-scrollbar) {{ .summary-plot-scroll {{ scrollbar-color: var(--muted) var(--bg); }} }}
     .summary-plot-scroll::-webkit-scrollbar {{ height: 12px; }}
     .summary-plot-scroll::-webkit-scrollbar-track {{ background: var(--bg); border-radius: 6px; }}
@@ -2144,7 +2144,7 @@ def render_html(
     .summary-tick, .summary-week-tick {{ position: absolute; top: 5px; color: var(--muted); font-size: .72rem; white-space: nowrap; }}
     .summary-week-tick {{ display: none; transform: translateX(-50%); font-size: .65rem; opacity: .7; }}
     @container overview (min-width: 650px) {{ .summary-week-tick {{ display: block; }} }}
-    .summary-as-of-label {{ position: absolute; top: 25px; color: var(--text); font-size: .72rem; font-weight: 650; white-space: nowrap; }}
+    .summary-as-of-label {{ position: absolute; z-index: 5; top: 5px; transform: translateX(-50%); padding: 0 3px; background: var(--card); color: var(--text); font-size: .72rem; font-weight: 650; white-space: nowrap; }}
     .summary-table-wrap {{ margin-top: 18px; overflow-x: auto; }}
     .summary-table {{ width: 100%; border-collapse: collapse; font-size: .86rem; }}
     .summary-table th, .summary-table td {{ padding: 8px 10px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }}
@@ -2241,15 +2241,38 @@ def render_html(
       const summary = document.getElementById("summary-container");
       let overviewFilter = "active";
       let overviewStart = null;
+      let overviewWidth = 0;
       const overviewResize = new ResizeObserver(() => restoreOverviewScroll());
 
       function overviewTrackWidth(scroller) {{
         return scroller.querySelector(".summary-axis-track").getBoundingClientRect().width;
       }}
 
+      function layoutOverviewLabels(scroller) {{
+        const label = scroller.querySelector(".summary-as-of-label");
+        if (!label) return;
+        const rect = label.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const styles = getComputedStyle(scroller);
+        const left = scroller.getBoundingClientRect().left + scroller.clientLeft;
+        const plotLeft = left + parseFloat(styles.getPropertyValue("--summary-label-width"))
+          + parseFloat(styles.getPropertyValue("--summary-gap"));
+        const visible = center >= plotLeft && center <= left + scroller.clientWidth;
+        label.style.visibility = visible ? "" : "hidden";
+        scroller.querySelectorAll(".summary-tick, .summary-week-tick").forEach((tick) => {{
+          const tickRect = tick.getBoundingClientRect();
+          const overlaps = visible && tickRect.right + 6 > rect.left && tickRect.left - 6 < rect.right;
+          tick.style.visibility = overlaps ? "hidden" : "";
+        }});
+      }}
+
       function restoreOverviewScroll() {{
         const scroller = summary.querySelector(".summary-plot-scroll");
-        if (scroller) scroller.scrollLeft = overviewStart * overviewTrackWidth(scroller);
+        if (scroller) {{
+          overviewWidth = overviewTrackWidth(scroller);
+          scroller.scrollLeft = overviewStart * overviewWidth;
+          layoutOverviewLabels(scroller);
+        }}
       }}
 
       function initializeOverviewScroll() {{
@@ -2259,7 +2282,12 @@ def render_html(
         if (overviewStart === null) overviewStart = Number(scroller.dataset.viewStart);
         restoreOverviewScroll();
         scroller.addEventListener("scroll", () => {{
-          overviewStart = scroller.scrollLeft / overviewTrackWidth(scroller);
+          if (overviewTrackWidth(scroller) !== overviewWidth) {{
+            restoreOverviewScroll();
+            return;
+          }}
+          overviewStart = scroller.scrollLeft / overviewWidth;
+          layoutOverviewLabels(scroller);
           hide();
         }}, {{ passive: true }});
         overviewResize.observe(scroller);
