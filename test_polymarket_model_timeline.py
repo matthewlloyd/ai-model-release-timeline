@@ -143,6 +143,9 @@ class TimelineTests(unittest.TestCase):
         self.assertIn("Aug 15, 2027", payload[1]["summary_html"])
         self.assertIn("Forecast as of Jul 1, 2027", payload[0]["summary_html"])
         self.assertIn("Forecast as of Jul 2, 2027", payload[1]["summary_html"])
+        label_pattern = r'class="summary-as-of-label"[^>]*>([^<]+)</span>'
+        self.assertEqual(re.search(label_pattern, payload[0]["summary_html"]).group(1), "Jul 1")
+        self.assertEqual(re.search(label_pattern, payload[1]["summary_html"]).group(1), "Today")
         self.assertIn('class="as-of-line"', payload[0]["cards_html"])
         self.assertIn("Forecast as of Jul 1, 2027", payload[0]["cards_html"])
         self.assertIn("Forecast as of Jul 2, 2027", payload[1]["cards_html"])
@@ -242,6 +245,36 @@ class TimelineTests(unittest.TestCase):
         self.assertEqual(timeline.overview_window_end(dt.date(2027, 12, 31)), dt.date(2028, 2, 29))
         self.assertEqual(timeline.overview_window_end(dt.date(2028, 12, 31)), dt.date(2029, 2, 28))
         self.assertEqual(timeline.overview_window_end(dt.date(2027, 7, 13)), dt.date(2027, 9, 13))
+
+    def test_week_boundaries_are_mondays_across_year_and_leap_day(self):
+        self.assertEqual(
+            timeline.week_boundaries(dt.date(2026, 12, 28), dt.date(2027, 1, 18)),
+            [dt.date(2027, 1, 4), dt.date(2027, 1, 11)],
+        )
+        self.assertEqual(
+            timeline.week_boundaries(dt.date(2028, 2, 25), dt.date(2028, 3, 7)),
+            [dt.date(2028, 2, 28), dt.date(2028, 3, 6)],
+        )
+        self.assertEqual(timeline.week_boundaries(dt.date(2027, 1, 5), dt.date(2027, 1, 5)), [])
+
+    def test_overview_week_grid_and_today_label_share_the_date_axis(self):
+        item = timeline.TimelineItem(
+            "OpenAI", "GPT", "release", dt.date(2026, 11, 1), "around Nov 1", "median", "", 1, "x", "1",
+            median_date=dt.date(2026, 11, 1),
+        )
+        output = timeline.render_summary_card(
+            [item], axis_range=(dt.date(2026, 10, 1), dt.date(2026, 12, 1)),
+            as_of=dt.date(2026, 10, 9), today=dt.date(2026, 10, 9),
+        )
+        self.assertIn('class="summary-week-grid" style="left: 5.97%"', output)  # Monday Oct 5
+        cursor_position = re.search(r'class="summary-as-of"[^>]*left: ([\d.]+)%', output).group(1)
+        label_position = re.search(r'class="summary-as-of-label"[^>]*left: ([\d.]+)%', output).group(1)
+        self.assertEqual(cursor_position, label_position)
+        self.assertIn('aria-label="Forecast as of Oct 9, 2026">Today</span>', output)
+        weekly_labels = re.findall(r'class="summary-week-tick"[^>]*>([^<]+)</span>', output)
+        self.assertIn("Oct 12", weekly_labels)
+        self.assertNotIn("Nov 2", weekly_labels)  # Avoid crowding the Nov 1 month label.
+        self.assertIn('class="summary-week-grid" style="left: 47.76%"', output)  # Nov 2 grid remains.
 
     def test_overview_scales_full_horizon_to_two_months_and_labels_every_month(self):
         item = timeline.TimelineItem(

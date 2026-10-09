@@ -1519,6 +1519,16 @@ def month_boundaries(start: dt.date, end: dt.date) -> list[dt.date]:
     return result
 
 
+def week_boundaries(start: dt.date, end: dt.date) -> list[dt.date]:
+    """Return Monday dates strictly inside a date range."""
+    current = start + dt.timedelta(days=7 - start.weekday())
+    result: list[dt.date] = []
+    while current < end:
+        result.append(current)
+        current += dt.timedelta(days=7)
+    return result
+
+
 def axis_tick_dates(
     start: dt.date,
     end: dt.date,
@@ -1735,6 +1745,7 @@ def render_summary_card(
     axis_range: tuple[dt.date, dt.date] | None = None,
     roster: Sequence[TimelineItem] | None = None,
     as_of: dt.date | None = None,
+    today: dt.date | None = None,
 ) -> str:
     """Render a shared date plot with a stable roster across history snapshots."""
     esc = lambda value: html.escape(str(value), quote=True)
@@ -1801,7 +1812,11 @@ def render_summary_card(
             return max(0.0, min(100.0, (date - min_date).days / span * 100))
 
         boundaries = month_boundaries(min_date, max_date)
-        month_grid = "".join(
+        weeks = week_boundaries(min_date, max_date)
+        date_grid = "".join(
+            f'<i class="summary-week-grid" style="left: {position(date):.2f}%" aria-hidden="true"></i>'
+            for date in weeks if date not in boundaries
+        ) + "".join(
             f'<i class="summary-month-grid" style="left: {position(date):.2f}%" aria-hidden="true"></i>'
             for date in boundaries
         )
@@ -1820,7 +1835,7 @@ def render_summary_card(
                 plot_rows.append(
                     f"""        <div class="summary-plot-row {esc(provider_class)} unavailable" data-summary-key="{esc(key)}" aria-label="{esc(representative.title)}: {esc(reason)}">
           {title_html}
-          <span class="summary-track" aria-hidden="true">{month_grid}</span>
+          <span class="summary-track" aria-hidden="true">{date_grid}</span>
         </div>"""
                 )
                 continue
@@ -1851,7 +1866,7 @@ def render_summary_card(
                 f"""        <div class="summary-plot-row {esc(provider_class)}" data-summary-key="{esc(key)}" aria-label="{esc(item.title)}: {esc(signal_text)}">
           <a class="summary-plot-label" href="#{esc(timeline_item_anchor(item))}" title="{esc(item.title)}">{esc(representative.title)}</a>
           <span class="summary-track" aria-hidden="true">
-            {month_grid}
+            {date_grid}
             <span class="{' '.join(iqr_classes)}" style="left: {iqr_left:.2f}%; width: {iqr_width:.2f}%"></span>
             <span class="summary-dot median" style="left: {position(date):.2f}%" data-chart-tooltip="{esc(tooltip)}"></span>
           </span>
@@ -1869,9 +1884,20 @@ def render_summary_card(
                 f'<span class="summary-tick" style="left: {position(date):.2f}%; transform: translateX({transform})">'
                 f'{esc(date.strftime("%b %d").replace(" 0", " "))}</span>'
             )
+        for date in weeks:
+            if all(abs((date - tick).days) >= 5 for tick in tick_dates):
+                ticks.append(
+                    f'<span class="summary-week-tick" style="left: {position(date):.2f}%">'
+                    f'{esc(date.strftime("%b %d").replace(" 0", " "))}</span>'
+                )
         as_of_overlay = ""
         if as_of:
             as_of_text = f"Forecast as of {pretty_date(as_of)}"
+            as_of_label = "Today" if as_of == today else as_of.strftime("%b %d").replace(" 0", " ")
+            ticks.append(
+                f'<span class="summary-as-of-label" style="left: {position(as_of):.2f}%" '
+                f'data-chart-tooltip="{esc(as_of_text)}" aria-label="{esc(as_of_text)}">{esc(as_of_label)}</span>'
+            )
             as_of_overlay = f"""        <span class="summary-as-of-overlay">
           <span aria-hidden="true"></span>
           <span class="summary-as-of-area"><i class="summary-as-of" role="img" style="left: {position(as_of):.2f}%" data-chart-tooltip="{esc(as_of_text)}" aria-label="{esc(as_of_text)}"></i></span>
@@ -2002,7 +2028,9 @@ def render_html(
     cards_html = render_timeline_cards(items, as_of=current_as_of)
 
     generated_text = generated_at.astimezone().strftime("%Y-%m-%d %H:%M %Z")
-    summary_card = render_summary_card(items, axis_range=axis_range, roster=roster, as_of=current_as_of)
+    summary_card = render_summary_card(
+        items, axis_range=axis_range, roster=roster, as_of=current_as_of, today=current_as_of
+    )
     history_controls = ""
     history_data = ""
     generated_source = "live Polymarket quotes"
@@ -2020,7 +2048,7 @@ def render_html(
             {
                 "date": snapshot.date.isoformat(),
                 "summary_html": render_summary_card(
-                    snapshot.items, axis_range=axis_range, roster=roster, as_of=snapshot.date
+                    snapshot.items, axis_range=axis_range, roster=roster, as_of=snapshot.date, today=current_as_of
                 ),
                 "cards_html": render_timeline_cards(snapshot.items, as_of=snapshot.date),
             }
@@ -2083,7 +2111,7 @@ def render_html(
     #summary-container[data-overview-filter="active"] .summary-table-row.unavailable {{ display: none; }}
     .summary-plot-title {{ margin: 12px 0 10px; color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }}
     .summary-plot-note {{ margin: -4px 0 10px; color: var(--muted); font-size: .76rem; }}
-    .summary-plot-scroll {{ --summary-label-width: 210px; --summary-gap: 14px; overflow-x: scroll; padding-bottom: 5px; }}
+    .summary-plot-scroll {{ --summary-label-width: 210px; --summary-gap: 14px; --summary-axis-height: 46px; container: overview / inline-size; overflow-x: scroll; padding-bottom: 5px; }}
     @supports not selector(::-webkit-scrollbar) {{ .summary-plot-scroll {{ scrollbar-color: var(--muted) var(--bg); }} }}
     .summary-plot-scroll::-webkit-scrollbar {{ height: 12px; }}
     .summary-plot-scroll::-webkit-scrollbar-track {{ background: var(--bg); border-radius: 6px; }}
@@ -2099,7 +2127,8 @@ def render_html(
     .summary-track {{ position: relative; display: block; height: 24px; }}
     .summary-track::before {{ content: ""; position: absolute; top: 50%; right: 0; left: 0; height: 1px; background: var(--line); }}
     .summary-month-grid {{ position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); opacity: .85; }}
-    .summary-as-of-overlay {{ position: absolute; z-index: 3; inset: 0 0 27px; pointer-events: none; }}
+    .summary-week-grid {{ position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--line); opacity: .5; }}
+    .summary-as-of-overlay {{ position: absolute; z-index: 3; inset: 0 0 calc(var(--summary-axis-height) + 1px); pointer-events: none; }}
     .summary-as-of-area {{ position: relative; align-self: stretch; }}
     .summary-as-of {{ position: absolute; top: 0; bottom: 0; width: 2px; transform: translateX(-50%); background: var(--text); opacity: .55; pointer-events: auto; }}
     .summary-iqr {{ position: absolute; z-index: 1; top: 50%; height: 2px; transform: translateY(-50%); border-radius: 1px; background: var(--series, var(--muted)); }}
@@ -2111,8 +2140,11 @@ def render_html(
     .summary-dot.horizon {{ transform: translate(-50%, -50%) rotate(45deg); background: var(--card); }}
     .summary-dot.deadline {{ background: var(--card); }}
     .summary-axis {{ margin-top: 1px; }}
-    .summary-axis-track {{ position: relative; display: block; height: 26px; border-top: 1px solid var(--line); }}
-    .summary-tick {{ position: absolute; top: 5px; color: var(--muted); font-size: .72rem; white-space: nowrap; }}
+    .summary-axis-track {{ position: relative; display: block; height: var(--summary-axis-height); border-top: 1px solid var(--line); }}
+    .summary-tick, .summary-week-tick {{ position: absolute; top: 5px; color: var(--muted); font-size: .72rem; white-space: nowrap; }}
+    .summary-week-tick {{ display: none; transform: translateX(-50%); font-size: .65rem; opacity: .7; }}
+    @container overview (min-width: 650px) {{ .summary-week-tick {{ display: block; }} }}
+    .summary-as-of-label {{ position: absolute; top: 25px; color: var(--text); font-size: .72rem; font-weight: 650; white-space: nowrap; }}
     .summary-table-wrap {{ margin-top: 18px; overflow-x: auto; }}
     .summary-table {{ width: 100%; border-collapse: collapse; font-size: .86rem; }}
     .summary-table th, .summary-table td {{ padding: 8px 10px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }}
