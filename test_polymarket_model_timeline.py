@@ -1,5 +1,6 @@
 import dataclasses
 import datetime as dt
+import gzip
 import io
 import json
 import re
@@ -23,6 +24,19 @@ def market(question, date_label, yes, volume=1000):
 
 
 class TimelineTests(unittest.TestCase):
+    def test_get_json_accepts_gzip_and_plain_responses(self):
+        for compressed in (False, True):
+            with self.subTest(compressed=compressed):
+                body = json.dumps({"title": "Modèle", "events": []}, ensure_ascii=False).encode()
+                response = io.BytesIO(gzip.compress(body) if compressed else body)
+                response.headers = {"Content-Encoding": "gzip"} if compressed else {}
+                with mock.patch.object(timeline.urllib.request, "urlopen", return_value=response) as urlopen:
+                    result = timeline.get_json("/events", {"limit": 100})
+                self.assertEqual(result, {"title": "Modèle", "events": []})
+                request = urlopen.call_args.args[0]
+                self.assertEqual(request.get_header("Accept-encoding"), "gzip")
+                self.assertEqual(request.get_header("Accept"), "application/json")
+
     def test_get_json_honors_retry_after_for_rate_limits(self):
         error = urllib.error.HTTPError(
             "https://gamma-api.polymarket.com/events",
@@ -31,8 +45,10 @@ class TimelineTests(unittest.TestCase):
             {"Retry-After": "3"},
             None,
         )
+        response = io.BytesIO(b'{"ok": true}')
+        response.headers = {}
         with (
-            mock.patch.object(timeline.urllib.request, "urlopen", side_effect=[error, io.BytesIO(b'{"ok": true}')]),
+            mock.patch.object(timeline.urllib.request, "urlopen", side_effect=[error, response]),
             mock.patch.object(timeline.random, "uniform", return_value=0.0),
             mock.patch.object(timeline.time, "sleep") as sleep,
         ):

@@ -19,6 +19,7 @@ import concurrent.futures
 import dataclasses
 import datetime as dt
 import email.utils
+import gzip
 import hashlib
 import html
 import json
@@ -260,12 +261,18 @@ def is_retryable_error(exc: BaseException) -> bool:
 def get_json(path: str, params: dict[str, Any] | None = None, retries: int = HTTP_RETRIES) -> Any:
     query = urllib.parse.urlencode(params or {}, doseq=True)
     url = f"{GAMMA_API}{path}" + (f"?{query}" if query else "")
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": USER_AGENT, "Accept": "application/json", "Accept-Encoding": "gzip"},
+    )
     for attempt in range(retries):
         try:
             with urllib.request.urlopen(request, timeout=20) as response:
-                return json.load(response)
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+                body = response.read()
+                if response.headers.get("Content-Encoding", "").lower() == "gzip":
+                    body = gzip.decompress(body)
+                return json.loads(body)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, gzip.BadGzipFile, EOFError) as exc:
             if attempt + 1 == retries or not is_retryable_error(exc):
                 raise ApiError(f"GET {url} failed: {exc}") from exc
             time.sleep(retry_delay_seconds(exc, attempt))
