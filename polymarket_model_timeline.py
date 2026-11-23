@@ -2082,6 +2082,7 @@ def render_html(
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="google-site-verification" content="UZs9vMezOr8m_vz-gULze7zgoWf5MbErQLZxyOpFrDU" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(SITE_TITLE)}</title>
   <meta name="description" content="{esc(SITE_DESCRIPTION)}">
